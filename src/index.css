@@ -1,4 +1,12 @@
+/* FUENTE GLOBAL: cambia la tipografía de todo el proyecto aquí.
+   1. Reemplaza la URL de @import por el enlace CSS de tu nueva fuente
+      (por ejemplo, el enlace de Google Fonts, no la página de la fuente).
+   2. Cambia 'Baloo 2' en --font-family por el nombre exacto de esa fuente.
+      Conserva las fuentes de respaldo para cuando la nueva no pueda cargar. */
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet');
+
 :root {
+  --font-family: 'Mochiy Pop One', 'Trebuchet MS', sans-serif;
   /* Cambia este valor para personalizar botones, iconos y acentos. */
   --color-primary: #1e73be;
   --color-primary-soft: color-mix(in srgb, var(--color-primary) 7%, white);
@@ -8,7 +16,7 @@
   --color-muted: #69737d;
   --color-border: #e8edf1;
   --color-background: #fff;
-  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-family);
   color: var(--color-text);
   background: var(--color-background);
   font-synthesis: none;
@@ -20,7 +28,7 @@
 
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; }
-button, input { font: inherit; }
+button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 button { cursor: pointer; }
 a { color: inherit; text-decoration: none; }

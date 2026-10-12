@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
 
-const columns = 'id,nombre,sexo,fecha_ingreso,edad_al_ingreso,fecha_nacimiento_estimada,convive_con,observaciones,temperamento,nivel_energia,estatus,foto,created_at,especie';
+const columns = 'id,nombre,sexo,fecha_ingreso,edad_al_ingreso,fecha_nacimiento_estimada,convive_con,observaciones,temperamento,nivel_energia,estatus,foto,ficha,created_at,especie';
 const pageSize = 500;
 
 export default function useMascotas() {

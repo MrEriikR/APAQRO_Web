@@ -38,7 +38,7 @@ export default function App() {
         {route.page === 'internal' ? <UsoInterno /> : route.page === 'detail' ? (
           <MascotaDetalle mascota={mascota} loading={loading} error={error} onRetry={retry} />
         ) : (
-          <Catalogo mascotas={mascotas} especie={route.species} loading={loading} error={error} onRetry={retry} />
+          <Catalogo key={route.species} mascotas={mascotas} especie={route.species} loading={loading} error={error} onRetry={retry} />
         )}
       </main>
 

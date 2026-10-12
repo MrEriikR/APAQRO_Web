@@ -8,6 +8,7 @@ const paths = {
   mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>,
   lock: <><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" /></>,
   upload: <><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5" /></>,
+  download: <path d="M12 3v13m-5-5 5 5 5-5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5" />,
   image: <><rect x="3" y="3" width="18" height="18" rx="3" /><circle cx="8" cy="8" r="1.5" /><path d="m21 15-6-6L3 21" /></>,
   close: <path d="m6 6 12 12M6 18 18 6" />,
   logout: <><path d="M9 3H4v18h5m5-5 5-4-5-4m-5 4h12" /></>,
@@ -24,6 +25,7 @@ const paths = {
   note: <><path d="M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9M14 3v7h7l-7-7Z" /><path d="M7 14h10M7 17h7" /></>,
   info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6m0-10h.01" /></>,
   refresh: <path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5" />,
+  search: <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></>,
 };
 
 export default function Icon({ name = 'paw', className = '', ...props }) {

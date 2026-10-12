@@ -22,10 +22,11 @@ Usa la clave publicable del proyecto. Las variables `VITE_*` forman parte del cl
 
 ## Datos
 
-El catálogo consulta `public.mascotas`. Usa las columnas `id`, `nombre`, `sexo`, `fecha_ingreso`, `edad_al_ingreso`, `fecha_nacimiento_estimada`, `convive_con`, `observaciones`, `temperamento`, `nivel_energia`, `estatus`, `foto`, `created_at` y `especie`.
+El catálogo consulta `public.mascotas`. Usa las columnas `id`, `nombre`, `sexo`, `fecha_ingreso`, `edad_al_ingreso`, `fecha_nacimiento_estimada`, `convive_con`, `observaciones`, `temperamento`, `nivel_energia`, `estatus`, `foto`, `ficha`, `created_at` y `especie`.
 
 - `especie`: admite `Perro` / `Gato`, sin importar mayúsculas, y equivalentes como `Canino` / `Felino`.
 - `foto`: URL de imagen accesible por el navegador, por ejemplo una URL pública de Supabase Storage. Una foto ausente o que no carga muestra un placeholder local.
+- `ficha`: URL de la imagen que descarga el botón **Descargar ficha**, debajo de la foto en el detalle. Si está vacía, el botón no aparece. La URL debe permitir su lectura desde la app (CORS), como las URLs públicas de Supabase Storage.
 - La edad actual se calcula desde `fecha_nacimiento_estimada`. Si falta, se calcula con `fecha_ingreso` y una edad de ingreso con unidades explícitas (por ejemplo, `1 año`, `2 meses` o `1 año y 6 meses`). Si no se puede calcular, se indica que se muestra la edad al ingresar. En el detalle se conserva el texto original de `edad_al_ingreso`.
 - Las fechas sin hora se interpretan como fechas locales para evitar que aparezca el día anterior.
 - Se muestran todos los registros legibles de cada especie; `estatus` se presenta tal como está guardado, sin filtrar registros ni inventar disponibilidad.

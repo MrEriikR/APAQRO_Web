@@ -1,7 +1,48 @@
+import { useState } from 'react';
 import Icon from '../components/Icon.jsx';
 import MascotaFoto from '../components/MascotaFoto.jsx';
 import CatalogState from '../components/CatalogState.jsx';
 import { formatDate, formatSex, formatValue, getAge, normalizeSpecies, sexIcon } from '../utils/mascotas.js';
+
+function DescargarFicha({ ficha }) {
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState(false);
+
+  async function download() {
+    if (downloading) return;
+    setDownloading(true);
+    setDownloadError(false);
+
+    try {
+      const response = await fetch(ficha, { signal: AbortSignal.timeout(30000) });
+      if (!response.ok) throw new Error('No se pudo descargar la ficha.');
+      const blob = await response.blob();
+      const filename = decodeURIComponent(new URL(ficha, window.location.href).pathname.split('/').pop()) || 'ficha';
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch {
+      setDownloadError(true);
+    } finally {
+      setDownloading(false);
+    }
+  }
+
+  return (
+    <>
+      <button type="button" className="primary-button detail-download" onClick={download} disabled={downloading} aria-busy={downloading}>
+        <Icon name="download" />
+        <span>{downloading ? 'Descargando…' : 'Descargar ficha'}</span>
+      </button>
+      {downloadError && <p className="detail-download-error" role="alert">No pudimos descargar la ficha. Inténtalo de nuevo.</p>}
+    </>
+  );
+}
 
 function DetailFact({ icon, label, children }) {
   return (
@@ -16,6 +57,7 @@ export default function MascotaDetalle({ mascota, loading, error, onRetry }) {
   const back = mascota && normalizeSpecies(mascota.especie) === 'gato' ? '#/gatos' : '#/perros';
   const age = mascota ? getAge(mascota) : null;
   const nombre = formatValue(mascota?.nombre, 'esta mascota');
+  const ficha = typeof mascota?.ficha === 'string' ? mascota.ficha.trim() : '';
   const asunto = `Preguntar por ${nombre}`;
   const mensaje = `Hola, me gustaría recibir más información sobre la adopción de ${nombre}.\r\n\r\n¡Gracias!`;
   const correo = `mailto:adopta@apaqro.org?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
@@ -34,7 +76,7 @@ export default function MascotaDetalle({ mascota, loading, error, onRetry }) {
         <article className="pet-detail" aria-labelledby="pet-name">
           <div className="detail-visual">
             <MascotaFoto key={mascota.id} mascota={mascota} priority />
-            <div className="photo-note"><Icon name="heart" /><p>Cada patita tiene una historia.<br /><strong>Conoce la de {mascota.nombre || 'tu próximo compañero'}.</strong></p></div>
+            {ficha && <DescargarFicha key={`${mascota.id}-${ficha}`} ficha={ficha} />}
           </div>
 
           <div className="detail-content">
