@@ -4,7 +4,7 @@ import { supabase } from '../../lib/supabase.js';
 const columns = 'id,nombre,sexo,fecha_ingreso,edad_al_ingreso,fecha_nacimiento_estimada,convive_con,observaciones,temperamento,nivel_energia,estatus,foto,ficha,created_at,especie';
 const pageSize = 500;
 
-export default function useMascotas() {
+export default function useMascotas(client = supabase) {
   const [mascotas, setMascotas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -17,13 +17,13 @@ export default function useMascotas() {
 
     async function load() {
       try {
-        if (!supabase) throw new Error('Supabase no está configurado.');
+        if (!client) throw new Error('Supabase no está configurado.');
         const records = [];
         let offset = 0;
         let more = true;
 
         while (more) {
-          const { data, error: queryError } = await supabase
+          const { data, error: queryError } = await client
             .from('mascotas')
             .select(columns)
             .order('nombre', { ascending: true })
@@ -55,7 +55,7 @@ export default function useMascotas() {
       window.clearTimeout(timeout);
       controller.abort();
     };
-  }, [attempt]);
+  }, [attempt, client]);
 
   function retry() {
     setLoading(true);

@@ -47,11 +47,20 @@ La clave publicable debe tener permiso de lectura para los registros que quieras
 - Ficha individual: `src/pages/MascotaDetalle.jsx`.
 - Grid: tres columnas en escritorio, dos en tablet y una en móvil.
 
-## Área interna y fotos
+## Área interna y reportes
 
-La página privada usa Supabase Auth para validar el código del equipo y Supabase Storage para guardar las fotos en tres apartados: animales nuevos, eventos y colaboradores. Cada uno incluye selección múltiple, vistas previas, validación, estado de subida y galería privada.
+La página `#/uso-interno` usa Supabase Auth para validar el código del equipo y muestra un dashboard de mascotas. Consulta todos los registros legibles con la sesión del equipo, respetando las políticas RLS de `public.mascotas` y cargando todas las páginas de la consulta.
 
-Para activar la cuenta y los permisos, sigue [supabase/README.md](supabase/README.md). El código y el token administrativo pertenecen a `.env.local`; nunca se publican mediante variables `VITE_*`.
+- Indicadores y tabla con filtros combinables de especie, sexo, estatus, edad actual, energía, temperamento, convivencia, nombre, ID, edad al ingresar, observaciones, presencia de fotos/fichas y fechas de ingreso, nacimiento y registro. **Más filtros** contiene los rangos y los campos adicionales. Las opciones de categorías provienen de los datos e incluyen `Sin dato` cuando corresponde.
+- Los rangos de fecha incluyen ambos extremos; los timestamps usan el día local del navegador. La edad se calcula en meses cumplidos al cargar o actualizar el dashboard. Los rangos de edad y fecha excluyen los datos que no se pueden calcular; también se pueden consultar explícitamente los datos faltantes.
+- La tabla permite ordenar, elegir columnas, paginar y seleccionar filas. La descarga incluye todos los resultados filtrados de todas las páginas; si hay filas seleccionadas, incluye únicamente esa selección. Cambiar filtros o actualizar datos limpia la selección de filas.
+- Exportación en **CSV UTF-8**, **XLSX** y **XLS binario**. Las columnas y el orden coinciden con la vista previa. Excel incluye las hojas `Mascotas` y `Filtros`, con los criterios utilizados. Los IDs y las fechas originales se conservan como texto y la edad en meses es numérica; los campos faltantes se exportan vacíos.
+- Se neutralizan fórmulas en CSV y se escriben textos literales en Excel. Si se exceden los límites de XLS o de longitud de celda de Excel, se informa al usuario para elegir otro formato sin truncar datos.
+- Excel se genera con [SheetJS desde su distribución oficial](https://docs.sheetjs.com/docs/getting-started/installation/frameworks/); la librería se carga al solicitar una descarga de Excel.
+
+El dashboard reemplaza las galerías de fotos; los archivos almacenados previamente no se eliminan.
+
+Para activar la cuenta del equipo, sigue [supabase/README.md](supabase/README.md). El código y el token administrativo pertenecen a `.env.local`; nunca se publican mediante variables `VITE_*`. La cuenta autenticada del equipo necesita permiso de lectura en `public.mascotas` para consultar reportes.
 
 ## Verificación
 

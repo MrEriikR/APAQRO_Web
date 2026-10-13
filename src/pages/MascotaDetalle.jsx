@@ -80,9 +80,9 @@ export default function MascotaDetalle({ mascota, loading, error, onRetry }) {
           </div>
 
           <div className="detail-content">
-            <p className="eyebrow">UNA HISTORIA POR CONOCER</p>
+            <p className="eyebrow">¡HOLA! SOY</p>
             <h1 id="pet-name" className="detail-name"><Icon name="paw" />{mascota.nombre || 'Nombre por conocer'}</h1>
-            <p className="detail-intro">Los pequeños detalles de tu próximo gran amigo.</p>
+            <p className="detail-intro">Y esta es mi ficha 🐾</p>
 
             <a className="primary-button detail-contact" href={correo}>
               <Icon name="mail" />
