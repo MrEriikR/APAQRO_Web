@@ -3,6 +3,7 @@ import Icon from '../components/Icon.jsx';
 import MascotaFoto from '../components/MascotaFoto.jsx';
 import CatalogState from '../components/CatalogState.jsx';
 import { formatDate, formatSex, formatValue, getAge, normalizeSpecies, sexIcon } from '../utils/mascotas.js';
+import { fetchPetImage } from '../utils/petImages.js';
 
 function DescargarFicha({ ficha }) {
   const [downloading, setDownloading] = useState(false);
@@ -14,10 +15,9 @@ function DescargarFicha({ ficha }) {
     setDownloadError(false);
 
     try {
-      const response = await fetch(ficha, { signal: AbortSignal.timeout(30000) });
-      if (!response.ok) throw new Error('No se pudo descargar la ficha.');
+      const { response, url: source } = await fetchPetImage(ficha, { signal: AbortSignal.timeout(30000) });
       const blob = await response.blob();
-      const filename = decodeURIComponent(new URL(ficha, window.location.href).pathname.split('/').pop()) || 'ficha';
+      const filename = decodeURIComponent(new URL(source, window.location.href).pathname.split('/').pop()) || 'ficha';
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -82,7 +82,7 @@ export default function MascotaDetalle({ mascota, loading, error, onRetry }) {
           <div className="detail-content">
             <p className="eyebrow">¡HOLA! SOY</p>
             <h1 id="pet-name" className="detail-name"><Icon name="paw" />{mascota.nombre || 'Nombre por conocer'}</h1>
-            <p className="detail-intro">Y esta es mi ficha 🐾</p>
+            <p className="detail-intro">Detalles de tu próximo compañero</p>
 
             <a className="primary-button detail-contact" href={correo}>
               <Icon name="mail" />

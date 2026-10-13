@@ -5,16 +5,16 @@ import { AGE_FILTERS, formatDate, formatSex, formatValue, getAge, getAgeInMonths
 const today = new Date(2026, 9, 12);
 
 test('calcula la edad actual desde el nacimiento, no desde la edad de ingreso', () => {
-  assert.deepEqual(getAge({ fecha_nacimiento_estimada: '2022-08-15', edad_al_ingreso: '1 año' }, today), { label: 'Edad estimada', value: '4 años, 1 mes' });
+  assert.deepEqual(getAge({ fecha_nacimiento_estimada: '2022-08-15', edad_al_ingreso: '1 año' }, today), { label: 'Edad estimada', value: '4 años' });
   assert.equal(getAge({ fecha_nacimiento_estimada: '2025-10-13' }, today).value, '11 meses');
   assert.equal(getAge({ fecha_nacimiento_estimada: '2025-10-12' }, today).value, '1 año');
   assert.equal(getAge({ fecha_nacimiento_estimada: '2026-10-12' }, today).value, 'Menos de 1 mes');
 });
 
 test('usa edad al ingresar y tiempo transcurrido si falta el nacimiento', () => {
-  assert.equal(getAge({ fecha_ingreso: '2025-10-12', edad_al_ingreso: '2 meses' }, today).value, '1 año, 2 meses');
-  assert.equal(getAge({ fecha_ingreso: '2025-10-12', edad_al_ingreso: '1 año y 6 meses' }, today).value, '2 años, 6 meses');
-  assert.equal(getAge({ fecha_ingreso: '2025-10-12', edad_al_ingreso: '0.5 años' }, today).value, '1 año, 6 meses');
+  assert.equal(getAge({ fecha_ingreso: '2025-10-12', edad_al_ingreso: '2 meses' }, today).value, '1 año');
+  assert.equal(getAge({ fecha_ingreso: '2025-10-12', edad_al_ingreso: '1 año y 6 meses' }, today).value, '2 años');
+  assert.equal(getAge({ fecha_ingreso: '2025-10-12', edad_al_ingreso: '0.5 años' }, today).value, '1 año');
 });
 
 test('conserva texto ambiguo y distingue edad al ingresar de edad actual', () => {

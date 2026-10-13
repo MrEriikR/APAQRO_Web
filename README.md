@@ -26,8 +26,9 @@ El catálogo consulta `public.mascotas`. Usa las columnas `id`, `nombre`, `sexo`
 
 - `especie`: admite `Perro` / `Gato`, sin importar mayúsculas, y equivalentes como `Canino` / `Felino`.
 - `foto`: URL de imagen accesible por el navegador, por ejemplo una URL pública de Supabase Storage. Una foto ausente o que no carga muestra un placeholder local.
+- Si la foto o la ficha no carga y su nombre de archivo contiene tildes, diéresis o `ñ`, se reintenta sin esas marcas y, si hace falta, en minúsculas (por ejemplo, `napoleón.png` → `napoleon.png`). Se conserva primero la URL original y no se modifican carpetas ni parámetros del enlace. El nombre mostrado de la mascota y los datos de Supabase conservan sus caracteres originales.
 - `ficha`: URL de la imagen que descarga el botón **Descargar ficha**, debajo de la foto en el detalle. Si está vacía, el botón no aparece. La URL debe permitir su lectura desde la app (CORS), como las URLs públicas de Supabase Storage.
-- La edad actual se calcula desde `fecha_nacimiento_estimada`. Si falta, se calcula con `fecha_ingreso` y una edad de ingreso con unidades explícitas (por ejemplo, `1 año`, `2 meses` o `1 año y 6 meses`). Si no se puede calcular, se indica que se muestra la edad al ingresar. En el detalle se conserva el texto original de `edad_al_ingreso`.
+- La edad actual se calcula desde `fecha_nacimiento_estimada`. Si falta, se calcula con `fecha_ingreso` y una edad de ingreso con unidades explícitas (por ejemplo, `1 año`, `2 meses` o `1 año y 6 meses`). Se muestra solo en años cumplidos a partir de un año, o solo en meses para menores de un año; antes del primer mes se muestra `Menos de 1 mes`. Si no se puede calcular, se indica que se muestra la edad al ingresar. En el detalle se conserva el texto original de `edad_al_ingreso`.
 - Las fechas sin hora se interpretan como fechas locales para evitar que aparezca el día anterior.
 - Se muestran todos los registros legibles de cada especie; `estatus` se presenta tal como está guardado, sin filtrar registros ni inventar disponibilidad.
 - `id` identifica la ficha y `created_at` es un dato interno; no se exponen como datos de adopción.

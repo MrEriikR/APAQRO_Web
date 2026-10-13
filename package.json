@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "setup:internal": "node scripts/setup-internal.mjs",
-    "test": "node --test src/utils/mascotas.test.js src/utils/internalPhotos.test.js src/utils/internalReports.test.js"
+    "test": "node --test src/utils/mascotas.test.js src/utils/internalPhotos.test.js src/utils/internalReports.test.js src/utils/petImages.test.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",

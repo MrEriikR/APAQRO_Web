@@ -51,8 +51,8 @@ function fullMonthsSince(date, now) {
 function formatMonths(total) {
   if (total < 1) return 'Menos de 1 mes';
   const years = Math.floor(total / 12);
-  const months = total % 12;
-  return [years ? `${years} ${years === 1 ? 'año' : 'años'}` : '', months ? `${months} ${months === 1 ? 'mes' : 'meses'}` : ''].filter(Boolean).join(', ');
+  if (years >= 1) return `${years} ${years === 1 ? 'año' : 'años'}`;
+  return `${total} ${total === 1 ? 'mes' : 'meses'}`;
 }
 
 function entryAgeInMonths(value) {
