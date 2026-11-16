@@ -1,8 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { AGE_FILTERS, formatDate, formatSex, formatValue, getAge, getAgeInMonths, getEnergyOptions, matchesPetFilters, normalizeSpecies } from './mascotas.js';
+import { AGE_FILTERS, formatDate, formatSex, formatValue, getAge, getAgeInMonths, getEnergyOptions, isAvailableForAdoption, matchesPetFilters, normalizeSpecies } from './mascotas.js';
 
 const today = new Date(2026, 9, 12);
+
+test('solo publica mascotas en adopción, con o sin acento y sin distinguir mayúsculas', () => {
+  for (const estatus of ['En adopción', 'en adopcion', 'EN ADOPCIÓN', ' En adopción ']) {
+    assert.equal(isAvailableForAdoption({ estatus }), true, estatus);
+  }
+  for (const estatus of ['Adoptado', 'ADOPTADA', 'Reservado', 'En tratamiento', 'No en adopción', '', null, undefined]) {
+    assert.equal(isAvailableForAdoption({ estatus }), false, String(estatus));
+  }
+});
 
 test('calcula la edad actual desde el nacimiento, no desde la edad de ingreso', () => {
   assert.deepEqual(getAge({ fecha_nacimiento_estimada: '2022-08-15', edad_al_ingreso: '1 año' }, today), { label: 'Edad estimada', value: '4 años' });

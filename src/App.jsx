@@ -6,12 +6,14 @@ import Catalogo from './pages/Catalogo.jsx';
 import MascotaDetalle from './pages/MascotaDetalle.jsx';
 import useMascotas from './hooks/useMascotas.js';
 import useHashRoute from './hooks/useHashRoute.js';
+import { isAvailableForAdoption } from './utils/mascotas.js';
 import './App.css';
 
 export default function App() {
   const route = useHashRoute();
   const { mascotas, loading, error, retry } = useMascotas();
-  const mascota = route.id ? mascotas.find((item) => item.id === route.id) : null;
+  const mascotasEnAdopcion = mascotas.filter(isAvailableForAdoption);
+  const mascota = route.id ? mascotasEnAdopcion.find((item) => item.id === route.id) : null;
 
   useEffect(() => {
     document.title = route.page === 'internal' ? 'Uso interno · APAQRO' : mascota
@@ -38,7 +40,7 @@ export default function App() {
         {route.page === 'internal' ? <UsoInterno /> : route.page === 'detail' ? (
           <MascotaDetalle mascota={mascota} loading={loading} error={error} onRetry={retry} />
         ) : (
-          <Catalogo key={route.species} mascotas={mascotas} especie={route.species} loading={loading} error={error} onRetry={retry} />
+          <Catalogo key={route.species} mascotas={mascotasEnAdopcion} especie={route.species} loading={loading} error={error} onRetry={retry} />
         )}
       </main>
 

@@ -4,6 +4,10 @@ export function normalizeText(value) {
   return String(value ?? '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
+export function isAvailableForAdoption(mascota) {
+  return normalizeText(mascota.estatus) === 'en adopcion';
+}
+
 export function normalizeSpecies(value) {
   const normalized = normalizeText(value);
   if (['perro', 'perros', 'perra', 'canino', 'canina', 'dog'].includes(normalized)) return 'perro';
