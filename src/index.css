@@ -1,12 +1,12 @@
 /* FUENTE GLOBAL: cambia la tipografía de todo el proyecto aquí.
    1. Reemplaza la URL de @import por el enlace CSS de tu nueva fuente
       (por ejemplo, el enlace de Google Fonts, no la página de la fuente).
-   2. Cambia 'Baloo 2' en --font-family por el nombre exacto de esa fuente.
+   2. Cambia 'Roboto' en --font-family por el nombre exacto de esa fuente.
       Conserva las fuentes de respaldo para cuando la nueva no pueda cargar. */
-@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
 
 :root {
-  --font-family: 'Mochiy Pop One', 'Trebuchet MS', sans-serif;
+  --font-family: 'Roboto', Arial, sans-serif;
   /* Cambia este valor para personalizar botones, iconos y acentos. */
   --color-primary: #1e73be;
   --color-primary-soft: color-mix(in srgb, var(--color-primary) 7%, white);

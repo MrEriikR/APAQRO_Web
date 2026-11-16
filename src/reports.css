@@ -32,7 +32,7 @@
 .report-date-range { min-width: 0; margin: 0; padding: 15px; border: 1px solid var(--color-border); border-radius: 12px; background: #fafcfe; }
 .report-date-range legend { padding: 0 6px; font-size: 11px; line-height: 1.6; }
 .report-range-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 15px; }
-.report-date-range input { padding: 8px; font-family: 'Trebuchet MS', sans-serif; font-size: 13px; }
+.report-date-range input { padding: 8px; font-family: var(--font-family); font-size: 13px; }
 .report-active-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .report-active-filters button { display: inline-flex; align-items: center; gap: 9px; max-width: 100%; min-height: 38px; padding: 8px 11px; border: 1px solid var(--color-primary-muted); border-radius: 9px; background: var(--color-primary-soft); color: var(--color-primary); text-align: left; font-size: 10px; line-height: 1.7; }
 .report-active-filters button > span { overflow-wrap: anywhere; min-width: 0; }
@@ -53,7 +53,7 @@
 .report-results > .report-panel-heading { padding: 0 25px; }
 .report-table-hint { padding: 0 25px 15px; font-size: 10px; line-height: 1.8; color: var(--color-muted); }
 .report-table-scroll { max-height: 540px; overflow: auto; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-.report-table { width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; font-family: 'Trebuchet MS', sans-serif; font-size: 13px; line-height: 1.6; }
+.report-table { width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; font-family: var(--font-family); font-size: 13px; line-height: 1.6; }
 .report-table th { position: sticky; top: 0; z-index: 2; background: #f2f6fa; border-bottom: 1px solid #dbe5ef; }
 .report-table th > button { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 140px; width: 100%; min-height: 53px; border: 0; padding: 12px 18px; background: transparent; color: var(--color-text); text-align: left; font-size: 12px; font-weight: 700; white-space: nowrap; }
 .report-table th > button:hover { background: var(--color-primary-muted); }
